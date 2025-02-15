@@ -3,8 +3,6 @@
 import { config } from "dotenv";
 import { Server } from "@modelcontextprotocol/sdk/server/index.js";
 
-// Load environment variables from .env file
-config();
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 import {
   CallToolRequestSchema,
@@ -14,6 +12,8 @@ import {
 } from "@modelcontextprotocol/sdk/types.js";
 import { LinearClient } from "@linear/sdk";
 import { GitHubClient } from "./github.js";
+
+config({ path: ".env" });
 
 const LINEAR_API_KEY = process.env.LINEAR_API_KEY;
 const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
@@ -1033,7 +1033,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
 async function main() {
   const transport = new StdioServerTransport();
   await server.connect(transport);
-  console.error("Linear MCP server running on stdio");
+  console.log("Linear MCP server running on stdio");
 }
 
 main().catch((error) => {
