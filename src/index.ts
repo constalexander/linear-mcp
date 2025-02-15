@@ -1,6 +1,10 @@
 #!/usr/bin/env node
 
+import { config } from "dotenv";
 import { Server } from "@modelcontextprotocol/sdk/server/index.js";
+
+// Load environment variables from .env file
+config();
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 import {
   CallToolRequestSchema,
